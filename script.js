@@ -12,13 +12,17 @@ document.addEventListener('DOMContentLoaded', function() {
     noBtn.addEventListener('click', function() {
         if (!noButtonClicked) {
             noButtonClicked = true;
-            noBtn.style.animation = 'moveNoButton 0.5s linear infinite';
+            noBtn.style.animation = 'moveNoButton 1s linear infinite';
         } else {
+            noBtn.style.pointerEvents = 'none';
             noBtn.innerHTML = "No (Unavailable) 😂";
             message.innerHTML = "Don't try hard, you will be mine! 😂";
-            hideButtons();
         }
     });
+
+    setTimeout(function() {
+        message.innerHTML = "Don't try hard, you will be mine! 😂";
+    }, 10000); // Show message after 10 seconds
 
     function hideButtons() {
         yesBtn.style.display = 'none';
