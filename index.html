@@ -11,40 +11,32 @@
 
     <script>
         // Function to handle incoming data
-        function handleData(data) {
-            const displayElement = document.getElementById('display-data');
-            if (data) {
-                displayElement.innerText = JSON.stringify(data, null, 2);
-            } else {
-                displayElement.innerText = 'No valid JSON data received.';
-            }
-        }
+       const express = require('express');
+       const bodyParser = require('body-parser');
+       const app = express();
 
-        // Check if there is data in the URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const dataFromUrl = Object.fromEntries(urlParams.entries());
+       app.use(bodyParser.json());
 
-        // If there is data in the URL, handle it
-        if (Object.keys(dataFromUrl).length > 0) {
-            handleData(dataFromUrl);
-        } else {
-            // Use fetch to get the data from the URL
-            fetch('/data-endpoint')  // Update the path based on your actual structure
-                .then(response => {
-                    if (response.ok) {
-                        try {
-                            return response.json();
-                        } catch (error) {
-                            console.error('Error decoding JSON:', error);
-                            return null;  // Return null if JSON decoding fails
-                        }
-                    } else {
-                        throw new Error(`Request failed with status: ${response.status}`);
-                    }
-                })
-                .then(data => handleData(data))
-                .catch(error => console.error('Error:', error));
-        }
+// Handle GET requests
+       app.get('/data-endpoint', (req, res) => {
+    // Your logic for handling GET requests
+           res.json({ message: 'GET request received' });
+       });
+
+// Handle POST requests
+       app.post('/data-endpoint', (req, res) => {
+    // Your logic for handling POST requests
+           const receivedData = req.body;
+           console.log('Received data:', receivedData);
+           res.json({ message: 'POST request received' });
+       });
+
+       const PORT = process.env.PORT || 3000;
+       app.listen(PORT, () => {
+           console.log(`Server is running on port ${PORT}`);
+       });
+
+               }
     </script>
 </body>
 </html>
