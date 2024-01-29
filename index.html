@@ -6,13 +6,20 @@
     <title>Data Receiver</title>
 </head>
 <body>
-    <h1>Data Receiver</h1>
-    <div id="receivedData"></div>
+    <h1>Data Received:</h1>
+    <pre id="display-data"></pre>
 
     <script>
-        function receiveData(data) {
-            document.getElementById('receivedData').innerHTML = JSON.stringify(data, null, 2);
+        // Function to handle incoming data
+        function handleData(data) {
+            document.getElementById('display-data').innerText = JSON.stringify(data, null, 2);
         }
+
+        // Use fetch to get the data from the URL
+        fetch('/your-repo/data-endpoint')
+            .then(response => response.json())
+            .then(data => handleData(data))
+            .catch(error => console.error('Error:', error));
     </script>
 </body>
 </html>
