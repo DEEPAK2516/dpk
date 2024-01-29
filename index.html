@@ -3,26 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your GitHub Pages Site</title>
-    <script>
-        window.onload = function() {
-            // Get URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            
-            // Get the value for the 'data' parameter
-            const dataValue = urlParams.get('data');
-            
-            // Update the content on the page
-            if (dataValue) {
-                document.getElementById('content').innerText = `Data from URL: ${dataValue}`;
-            } else {
-                document.getElementById('content').innerText = 'No data provided in the URL.';
-            }
-        };
-    </script>
+    <title>Data Receiver</title>
 </head>
 <body>
-    <h1>Your GitHub Pages Site</h1>
-    <p id="content"></p>
+    <h1>Data Receiver</h1>
+    <div id="receivedData"></div>
+
+    <script>
+        function receiveData(data) {
+            document.getElementById('receivedData').innerHTML = JSON.stringify(data, null, 2);
+        }
+    </script>
 </body>
 </html>
