@@ -12,12 +12,23 @@
     <script>
         // Function to handle incoming data
         function handleData(data) {
-            document.getElementById('display-data').innerText = JSON.stringify(data, null, 2);
+            const displayElement = document.getElementById('display-data');
+            if (data) {
+                displayElement.innerText = JSON.stringify(data, null, 2);
+            } else {
+                displayElement.innerText = 'No data received or invalid JSON format.';
+            }
         }
 
         // Use fetch to get the data from the URL
         fetch('/dpk/')  // Update the path based on your actual structure
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error(`Request failed with status: ${response.status}`);
+                }
+            })
             .then(data => handleData(data))
             .catch(error => console.error('Error:', error));
     </script>
