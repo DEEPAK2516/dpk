@@ -1,15 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Do You Wanna Be Mine?</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Parameter Demo</title>
+    <script>
+        window.onload = function() {
+            // Get URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // Get the value for the 'data' parameter
+            const dataValue = urlParams.get('data');
+            
+            // Update the content on the page
+            if (dataValue) {
+                document.getElementById('content').innerText = `Data from URL: ${dataValue}`;
+            } else {
+                document.getElementById('content').innerText = 'No data provided in the URL.';
+            }
+        };
+    </script>
 </head>
 <body>
-    <h1>Do You Wanna Be Mine?</h1>
-    <button id="yesBtn">Yes 😃</button>
-    <button id="noBtn">No 😔</button>
-    <div id="message"></div>
-
-    <script src="script.js"></script>
+    <h1>Website that Accepts Data from URL</h1>
+    <p id="content"></p>
 </body>
 </html>
